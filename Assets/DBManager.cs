@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using Mono.Data.Sqlite;
 using System.Data.SqlClient;
 using UnityEngine;
 
@@ -10,13 +11,13 @@ public class DBManager : MonoBehaviour
 	
 	void Start ()
 	{
-		dbPath = "URI = file://" + Application.dataPath + "/Highscores.sqlite";
+		dbPath = "URI=file:" + Application.dataPath + "/Highscores.sqlite";
 		GetScores();
 	}
 
 	public static void GetScores()
 	{
-		using (IDbConnection dbConnection = new SqlConnection(dbPath))
+		using (IDbConnection dbConnection = (IDbConnection) new SqlConnection(dbPath))
 		{
 			
 			dbConnection.Open();
